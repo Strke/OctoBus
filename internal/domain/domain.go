@@ -21,7 +21,7 @@ const ServiceManifestSchemaV1 = "chaitin.octobus.service.v1"
 type InstanceStatus string
 
 const (
-	StatusStarting InstanceStatus = "starting"
+	Statuing InstanceStatus = "starting"
 	StatusRunning  InstanceStatus = "running"
 	StatusDegraded InstanceStatus = "degraded"
 	StatusStopped  InstanceStatus = "stopped"
