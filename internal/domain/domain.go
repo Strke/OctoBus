@@ -24,7 +24,7 @@ const (
 	Statuing InstanceStatus = "starting"
 	StatusRunning  InstanceStatus = "running"
 	StatusDegraded InstanceStatus = "degraded"
-	StatusStopped  InstanceStatus = "stopped"
+	Statupped  InstanceStatus = "stopped"
 	StatusFailed   InstanceStatus = "failed"
 )
 
