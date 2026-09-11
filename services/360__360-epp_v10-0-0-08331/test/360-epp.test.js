@@ -13,23 +13,14 @@ function startMock() {
     const child = fork(new URL('mock_upstream.js', import.meta.url), [], {
       stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
     });
-    const timer = setTimeout(() => reject(new Error('mock start timeout')), 10000);
     child.on('message', (msg) => {
-      if (msg?.port) {
-        clearTimeout(timer);
-        resolve({ child, port: msg.port });
-      }
+      if (msg?.port) resolve({ child, port: msg.port });
     });
-    child.on('error', (err) => {
-      clearTimeout(timer);
-      reject(err);
-    });
+    child.on('error', reject);
     child.on('exit', (code) => {
-      if (code !== 0 && code !== null) {
-        clearTimeout(timer);
-        reject(new Error(`mock exited with ${code}`));
-      }
+      if (code !== 0 && code !== null) reject(new Error(`mock exited with ${code}`));
     });
+    setTimeout(() => reject(new Error('mock start timeout')), 10000);
   });
 }
 
