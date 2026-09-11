@@ -443,6 +443,7 @@ func gitArchivePackage(ctx context.Context, runner *gitRunner, repoDir, commit, 
 	}
 	outFile, err := os.Create(artifactPath)
 	if err != nil {
+		_, _ = io.Copy(io.Discard, stdout)
 		_ = cmd.Wait()
 		return err
 	}
@@ -517,8 +518,18 @@ func scrubGitText(src gitSource, text string) string {
 			replacements[decoded] = "******"
 		}
 	}
-	for raw, redacted := range replacements {
-		out = strings.ReplaceAll(out, raw, redacted)
+	keys := make([]string, 0, len(replacements))
+	for raw := range replacements {
+		keys = append(keys, raw)
+	}
+	sort.Slice(keys, func(i, j int) bool {
+		if len(keys[i]) != len(keys[j]) {
+			return len(keys[i]) > len(keys[j])
+		}
+		return keys[i] < keys[j]
+	})
+	for _, raw := range keys {
+		out = strings.ReplaceAll(out, raw, replacements[raw])
 	}
 	return out
 }

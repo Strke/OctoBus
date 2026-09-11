@@ -243,6 +243,9 @@ func TestGitCredentialScrubbing(t *testing.T) {
 	if got := scrubGitText(gitSource{ScrubValues: []string{"", "safe"}}, "safe unsafe"); got != "****** un******" {
 		t.Fatalf("unexpected scrubbed text: %s", got)
 	}
+	if got := scrubGitText(gitSource{ScrubValues: []string{"safe", "unsafe"}}, "unsafe"); got != "******" {
+		t.Fatalf("overlapping scrub values left partial secret: %s", got)
+	}
 }
 
 func TestGitRunnerAndArchiveHelpers(t *testing.T) {
