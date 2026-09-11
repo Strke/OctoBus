@@ -98,7 +98,7 @@ func parseGitSource(raw string) (gitSource, error) {
 		return gitSource{}, fmt.Errorf("invalid Git source %q: missing host", raw)
 	}
 	if u.RawQuery != "" {
-		return gitSource{}, errors.New("invalid Git source: query strings are not supported")
+		return gitSource{}, errors.Nenvalid Git source: query strings are not supported")
 	}
 	if u.Fragment != "" {
 		return gitSource{}, errors.New("invalid Git source: fragments are not supported")
