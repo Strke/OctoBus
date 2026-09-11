@@ -375,6 +375,59 @@ func TestFollowFileStreamsAppendedMatchingLines(t *testing.T) {
 	}
 }
 
+func TestFollowFileContinuesAfterBlankLine(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, FileName)
+	if err := os.WriteFile(path, []byte(`{"capset":"dev","method":"first"}`+"\n"), 0o600); err != nil {
+		t.Fatal(err)
+	}
+
+	done := make(chan struct{})
+	var out safeBuffer
+	errc := make(chan error, 1)
+	go func() {
+		errc <- FollowFile(path, Filter{Follow: true}, &out, done)
+	}()
+
+	deadline := time.Now().Add(2 * time.Second)
+	for time.Now().Before(deadline) {
+		if strings.Contains(out.String(), `"method":"first"`) {
+			break
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
+	if !strings.Contains(out.String(), `"method":"first"`) {
+		close(done)
+		t.Fatalf("initial output=%q", out.String())
+	}
+
+	f, err := os.OpenFile(path, os.O_APPEND|os.O_WRONLY, 0o600)
+	if err != nil {
+		close(done)
+		t.Fatal(err)
+	}
+	if _, err := f.WriteString("\n" + `{"capset":"dev","method":"second"}` + "\n"); err != nil {
+		close(done)
+		t.Fatal(err)
+	}
+	_ = f.Close()
+
+	deadline = time.Now().Add(2 * time.Second)
+	for time.Now().Before(deadline) {
+		if strings.Contains(out.String(), `"method":"second"`) {
+			break
+		}
+		time.Sleep(10 * time.Millisecond)
+	}
+	close(done)
+	if err := <-errc; err != nil {
+		t.Fatal(err)
+	}
+	if got := out.String(); !strings.Contains(got, `"method":"second"`) {
+		t.Fatalf("follow output=%q", got)
+	}
+}
+
 func TestFollowFileValidationAndInitialErrors(t *testing.T) {
 	dir := t.TempDir()
 	path := filepath.Join(dir, FileName)

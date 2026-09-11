@@ -267,7 +267,7 @@ func waitOpen(path string, done <-chan struct{}) (*os.File, error) {
 }
 
 func readNextLine(f *os.File, done <-chan struct{}) ([]byte, error) {
-	var line []byte
+	line := []byte{}
 	buf := make([]byte, 1)
 	for {
 		n, err := f.Read(buf)
