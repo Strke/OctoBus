@@ -4,7 +4,7 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert';
 import { fork } from 'child_process';
 
-import { rpcdef } from '../src/360-epp.js';
+import { rpcdef, _test } from '../src/360-epp.js';
 
 const mockUrl = (port) => `http://127.0.0.1:${port}`;
 
@@ -85,11 +85,68 @@ describe('360 EPP Service', () => {
     });
   });
 
+  describe('toStructValue', () => {
+    it('should encode numbers, booleans and null as native Struct values', () => {
+      assert.deepEqual(
+        _test.toStructValue({
+          count: 3,
+          rate: 1.5,
+          enabled: true,
+          disabled: false,
+          missing: null,
+          name: 'epp',
+          items: [1, false, null, { level: 2 }],
+        }),
+        {
+          structValue: {
+            fields: {
+              count: { numberValue: 3 },
+              rate: { numberValue: 1.5 },
+              enabled: { boolValue: true },
+              disabled: { boolValue: false },
+              missing: { nullValue: 'NULL_VALUE' },
+              name: { stringValue: 'epp' },
+              items: {
+                listValue: {
+                  values: [
+                    { numberValue: 1 },
+                    { boolValue: false },
+                    { nullValue: 'NULL_VALUE' },
+                    { structValue: { fields: { level: { numberValue: 2 } } } },
+                  ],
+                },
+              },
+            },
+          },
+        }
+      );
+    });
+
+    it('should keep null fields instead of dropping them', () => {
+      assert.deepEqual(_test.toStructValue({ statistics: { '0': 1, '-1': null } }), {
+        structValue: {
+          fields: {
+            statistics: {
+              structValue: {
+                fields: {
+                  '0': { numberValue: 1 },
+                  '-1': { nullValue: 'NULL_VALUE' },
+                },
+              },
+            },
+          },
+        },
+      });
+    });
+  });
+
   describe('GetDashboardInfo', () => {
     it('should fetch dashboard info', async () => {
       const ctx = makeCtx();
       const result = await rpcdef(ctx)['Qihoo360_EPP.Qihoo360_EPP/GetDashboardInfo']();
       assert.ok(result.data);
+      assert.deepEqual(result.data.structValue.fields.terminal_count, { numberValue: 100 });
+      assert.deepEqual(result.data.structValue.fields.virus_count, { numberValue: 5 });
     });
   });
 
@@ -100,6 +157,8 @@ describe('360 EPP Service', () => {
       assert.ok(result.alarms);
       assert.ok(Array.isArray(result.alarms));
       assert.ok(result.total >= 0);
+      assert.deepEqual(result.statistics.structValue.fields['0'], { numberValue: 1 });
+      assert.deepEqual(result.statistics.structValue.fields['1'], { numberValue: 0 });
     });
   });
 

@@ -503,23 +503,27 @@ async function handleGetTerminalHardware(ctx) {
 // ========== Value Mapping ==========
 
 function toStructValue(val) {
-  if (val === undefined || val === null) return null;
-  if (typeof val !== 'object') return { stringValue: String(val) };
+  if (val === undefined || val === null) return { nullValue: 'NULL_VALUE' };
+  if (typeof val === 'string') return { stringValue: val };
+  if (typeof val === 'number') {
+    return Number.isFinite(val) ? { numberValue: val } : { stringValue: String(val) };
+  }
+  if (typeof val === 'boolean') return { boolValue: val };
   if (Array.isArray(val)) {
     return {
       listValue: {
-        values: val.map((v) => toStructValue(v)).filter(Boolean),
+        values: val.map((v) => toStructValue(v)),
       },
     };
   }
-  const fields = {};
-  for (const [k, v] of Object.entries(val)) {
-    const mapped = toStructValue(v);
-    if (mapped !== null) {
-      fields[k] = mapped;
+  if (typeof val === 'object') {
+    const fields = {};
+    for (const [k, v] of Object.entries(val)) {
+      fields[k] = toStructValue(v);
     }
+    return { structValue: { fields } };
   }
-  return { structValue: { fields } };
+  return { stringValue: String(val) };
 }
 
 function mapTerminalInfo(item) {
@@ -600,3 +604,7 @@ export const METHOD_LIST_ALARMS = LIST_ALARMS;
 export const METHOD_GET_VIRUS_STATS = GET_VIRUS_STATS;
 export const METHOD_GET_LEAKFIX_STATS = GET_LEAKFIX_STATS;
 export const METHOD_GET_TERMINAL_HARDWARE = GET_TERMINAL_HARDWARE;
+
+export const _test = {
+  toStructValue,
+};
