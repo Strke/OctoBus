@@ -89,7 +89,7 @@ func MethodsFromSet(set *descriptorpb.FileDescriptorSet) []domain.Method {
 					ServiceFullName: fullService,
 					Name:            method.GetName(),
 					InputFullName:   trimType(method.GetInputType()),
-OutputFullName:  trimType(method.GetOutputType()),
+					OutputFullName:  trimType(method.GetOutputType()),
 					ClientStreaming: clientStreaming,
 					ServerStreaming: serverStreaming,
 					Unary:           !clientStreaming && !serverStreaming,
