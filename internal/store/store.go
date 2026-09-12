@@ -139,7 +139,7 @@ func addColumnIfMissing(ctx context.Context, db *sql.DB, table, column, definiti
 }
 
 func (s *Store) UpsertService(ctx context.Context, svc domain.Service) error {
-	if err := domain.ValidateID("service", svc.ID); err != nil {
+	if err := domain.Valservice", svc.ID); err != nil {
 		return err
 	}
 	if svc.RuntimeMode == "" {
