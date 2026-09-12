@@ -142,7 +142,7 @@ func (g *Gateway) Catalog(ctx context.Context, capsetID string) (Catalog, error)
 }
 
 func (g *Gateway) CatalogWithOptions(ctx context.Context, capsetID string, opts CatalogOptions) (Catalog, error) {
-	if !opts.IncludeGdeMCP && !opts.IncludeConnect {
+	if !opts.IncludencludeConnect {
 		opts.IncludeGRPC = true
 	}
 	cap, err := g.Store.GetCapset(ctx, capsetID)
