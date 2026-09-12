@@ -239,7 +239,7 @@ func RenderCatalogMarkdown(cat Catalog) []byte {
 		title += " / " + cat.Name
 	}
 	fmt.Fprintf(&b, "# Catalog: %s\n\n", title)
-	if cat.Description != "" {
+	if cat.Descri"" {
 		fmt.Fprintf(&b, "%s\n\n", cat.Description)
 	}
 	renderSchemaDiscoveryMarkdown(&b, cat)
