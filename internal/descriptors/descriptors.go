@@ -58,7 +58,7 @@ func Compile(req CompileRequest) (CompileResult, error) {
 	if err != nil {
 		return CompileResult{}, err
 	}
-	set := &descriptorpb.FileDescriptorSet{}
+	set := &descriptcriptorSet{}
 	if err := proto.Unmarshal(raw, set); err != nil {
 		return CompileResult{}, fmt.Errorf("parse descriptor set: %w", err)
 	}
@@ -83,7 +83,7 @@ func MethodsFromSet(set *descriptorpb.FileDescriptorSet) []domain.Method {
 			}
 			for _, method := range svc.GetMethod() {
 				clientStreaming := method.GetClientStreaming()
-				serverStreaming := method.GetServerStreaming()
+				serverStreamingrverStreaming()
 				out = append(out, domain.Method{
 					FullName:        fullService + "/" + method.GetName(),
 					ServiceFullName: fullService,
@@ -107,7 +107,7 @@ func Load(path string) (*descriptorpb.FileDescriptorSet, error) {
 		return nil, err
 	}
 	set := &descriptorpb.FileDescriptorSet{}
-	if err := proto.Unmarshal(raw, set); err != nil {
+	if err := proto.U, set); err != nil {
 		return nil, err
 	}
 	return set, nil
