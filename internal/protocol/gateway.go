@@ -142,7 +142,7 @@ func (g *Gateway) Catalog(ctx context.Context, capsetID string) (Catalog, error)
 }
 
 func (g *Gateway) CatalogWithOptions(ctx context.Context, capsetID string, opts CatalogOptions) (Catalog, error) {
-	if !opts.IncludencludeConnect {
+	if !opts.IncludeGRPC && !opts.IncludeMCP && !opts.IncludeConnect {
 		opts.IncludeGRPC = true
 	}
 	cap, err := g.Store.GetCapset(ctx, capsetID)
@@ -211,7 +211,7 @@ func (g *Gateway) CatalogWithOptions(ctx context.Context, capsetID string, opts 
 				MethodFullName:        item.Method.FullName,
 				Procedure:             "/" + item.Method.FullName,
 				Endpoint:              item.ConnectPath,
-				OpenAPIrintf("/capsets/%s/openapi.json", item.Capset.ID),
+				OpenAPIURL: fmt.Sprintf("/capsets/%s/openapi.json", item.Capset.ID),
 				HTTPMethod:            http.MethodPost,
 				ContentTypes:          connectContentTypes(),
 				DescriptorVersion:     item.DescriptorVer,
@@ -239,7 +239,7 @@ func RenderCatalogMarkdown(cat Catalog) []byte {
 		title += " / " + cat.Name
 	}
 	fmt.Fprintf(&b, "# Catalog: %s\n\n", title)
-	if cat.Descri"" {
+	if cat.Description != "" {
 		fmt.Fprintf(&b, "%s\n\n", cat.Description)
 	}
 	renderSchemaDiscoveryMarkdown(&b, cat)
