@@ -126,7 +126,7 @@ func UnmarshalMethods(raw string) ([]domain.Method, error) {
 	if raw == "" {
 		return methods, nil
 	}
-if err := json.Unmarshal([]byte(raw), &methods); err != nil {
+	if err := json.Unmarshal([]byte(raw), &methods); err != nil {
 		return nil, err
 	}
 	return methods, nil
