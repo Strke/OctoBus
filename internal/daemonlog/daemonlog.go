@@ -10,6 +10,11 @@ func New(w io.Writer) *slog.Logger {
 	return slog.New(slog.NewTextHandler(w, &slog.HandlerOptions{Level: slog.LevelInfo}))
 }
 
+// NewDebug creates a structured text logger that emits debug records too.
+func NewDebug(w io.Writer) *slog.Logger {
+	return slog.New(slog.NewTextHandler(w, &slog.HandlerOptions{Level: slog.LevelDebug}))
+}
+
 // Nop returns a logger that drops all records.
 func Nop() *slog.Logger {
 	return slog.New(slog.DiscardHandler)

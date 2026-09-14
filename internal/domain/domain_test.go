@@ -42,6 +42,32 @@ func TestDescriptorVersion(t *testing.T) {
 	}
 }
 
+func TestValidateInstanceStatus(t *testing.T) {
+	for _, status := range ValidStatuses() {
+		if err := ValidateInstanceStatus(status); err != nil {
+			t.Fatalf("status %q should be valid: %v", status, err)
+		}
+	}
+	if err := ValidateInstanceStatus("bogus"); err == nil {
+		t.Fatal("bogus status should be invalid")
+	}
+}
+
+func TestInstanceIsActive(t *testing.T) {
+	if !(Instance{Status: StatusRunning}).IsActive() {
+		t.Fatal("running instance should be active")
+	}
+	if !(Instance{Status: StatusStarting}).IsActive() {
+		t.Fatal("starting instance should be active")
+	}
+	if (Instance{Status: StatusStopped}).IsActive() {
+		t.Fatal("stopped instance should not be active")
+	}
+	if (Instance{Status: StatusFailed}).IsActive() {
+		t.Fatal("failed instance should not be active")
+	}
+}
+
 func TestManifestRuntimeMode(t *testing.T) {
 	tests := []struct {
 		name    string

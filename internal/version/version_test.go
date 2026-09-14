@@ -10,6 +10,14 @@ func TestInfoString(t *testing.T) {
 	}
 }
 
+func TestInfoShort(t *testing.T) {
+	got := Info{Version: "v1.2.3", Commit: "abc1234"}.Short()
+	want := "v1.2.3 (abc1234)"
+	if got != want {
+		t.Fatalf("Info.Short() = %q, want %q", got, want)
+	}
+}
+
 func TestCurrentUsesBuildVariables(t *testing.T) {
 	origVersion, origCommit, origDate := Version, Commit, Date
 	t.Cleanup(func() {

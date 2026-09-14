@@ -139,7 +139,6 @@ func parseGitSource(raw string) (gitSource, error) {
 	remote.User = nil
 	credentialURL := remote.String()
 	redactedURL := remote.String()
-	credentialURL := ""
 	if u.User != nil {
 		credentialURL = u.String()
 		redactedURL = redactedGitRemote(u)

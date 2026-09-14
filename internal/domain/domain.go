@@ -86,6 +86,10 @@ type Instance struct {
 	UpdatedAt    time.Time
 }
 
+func (i Instance) IsActive() bool {
+	return i.Status == StatusRunning || i.Status == StatusStarting
+}
+
 type Capset struct {
 	ID          string
 	Name        string
@@ -162,6 +166,19 @@ func ValidateID(kind, id string) error {
 		return fmt.Errorf("invalid %s id %q: must match %s", kind, id, idPattern.String())
 	}
 	return nil
+}
+
+func ValidStatuses() []InstanceStatus {
+	return []InstanceStatus{StatusStarting, StatusRunning, StatusDegraded, StatusStopped, StatusFailed}
+}
+
+func ValidateInstanceStatus(status InstanceStatus) error {
+	for _, valid := range ValidStatuses() {
+		if status == valid {
+			return nil
+		}
+	}
+	return fmt.Errorf("invalid instance status %q: must be one of %v", status, ValidStatuses())
 }
 
 func ValidateManifest(m ServiceManifest) error {

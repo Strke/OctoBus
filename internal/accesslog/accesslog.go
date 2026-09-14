@@ -96,7 +96,7 @@ type Filter struct {
 
 func ReadFile(path string, filter Filter, w io.Writer) error {
 	if filter.Limit < 0 {
-		return fmt.Errorf("limit must be non-negative")
+		return errors.New("limit must be non-negative")
 	}
 	f, err := os.Open(path)
 	if err != nil {
@@ -111,13 +111,13 @@ func ReadFile(path string, filter Filter, w io.Writer) error {
 
 func FilterLines(r io.Reader, filter Filter, w io.Writer) error {
 	if filter.Limit < 0 {
-		return fmt.Errorf("limit must be non-negative")
+		return errors.New("limit must be non-negative")
 	}
 	if filter.Tail < 0 {
-		return fmt.Errorf("tail must be non-negative")
+		return errors.New("tail must be non-negative")
 	}
 	if filter.LimitSet && filter.TailSet {
-		return fmt.Errorf("limit and tail are mutually exclusive")
+		return errors.New("limit and tail are mutually exclusive")
 	}
 	limit := DefaultLimit
 	if filter.LimitSet {
@@ -187,10 +187,10 @@ func FilterLines(r io.Reader, filter Filter, w io.Writer) error {
 
 func FollowFile(path string, filter Filter, w io.Writer, done <-chan struct{}) error {
 	if filter.Limit < 0 {
-		return fmt.Errorf("limit must be non-negative")
+		return errors.New("limit must be non-negative")
 	}
 	if filter.Tail < 0 {
-		return fmt.Errorf("tail must be non-negative")
+		return errors.New("tail must be non-negative")
 	}
 	f, err := os.Open(path)
 	if err != nil {
