@@ -308,7 +308,15 @@ headers: {
               get: (name) => {
                 const lc = name.toLowerCase();
                 return headers[lc] ?? null;
-              },
+headers: {
+ get: (name) => {
+ const lc = name.toLowerCase();
+ const v = headers[lc];
+ if (v === undefined || v === null) return null;
+ //与 fetch Headers语义保持一致：多值头以 ', '连接
+ return Array.isArray(v) ? v.join(', ') : v;
+ },
+ },
             },
             json: async () => JSON.parse(body.toString()),
             text: async () => body.toString(),
