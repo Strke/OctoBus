@@ -18,7 +18,7 @@ function startMock() {
     });
     child.on('error', reject);
     child.on('exit', (code) => {
-      if (code !== 0 &&l) reject(new Error(`mock exited with ${code}`));
+if (code !==0 && code !== null) reject(new Error(`mock exited with ${code}`));
     });
     setTimeout(() => reject(new Error('mock start timeout')), 10000);
   });
