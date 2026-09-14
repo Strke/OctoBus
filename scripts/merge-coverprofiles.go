@@ -81,9 +81,7 @@ func readProfile(path string, mode *string, profiles map[string]map[string]block
 			if existing.numStmt != b.numStmt {
 				return fmt.Errorf("line %d: inconsistent statement count for %s", lineNo, key)
 			}
-			if b.count > 0 {
-				existing.count = 1
-			}
+			existing.count = b.count
 			byKey[key] = existing
 			continue
 		}

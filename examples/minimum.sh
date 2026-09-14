@@ -30,7 +30,7 @@ cleanup() {
   wait "${PID}" 2>/dev/null || true
   rm -rf "${OCTOBUS_DATA_DIR}"
 }
-trap cleanup EXIT INT TERM
+trap cleanup EXIT
 
 # let the server start
 sleep 2

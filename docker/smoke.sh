@@ -13,7 +13,6 @@ import_status="$(mktemp)"
 
 cleanup() {
 	docker rm -f "$container_name" >/dev/null 2>&1 || true
-	docker volume rm -f "$volume_name" >/dev/null 2>&1 || true
 	rm -rf "$fixture_dir"
 	rm -f "$status_file" "$import_body" "$import_status"
 }

@@ -33,6 +33,6 @@ export interface DefineServiceConfig {
 
 export function defineService(config: DefineServiceConfig): ServiceDefinition {
   return {
-    handlers: { ...config.handlers },
+    handlers: config.handlers,
   };
 }

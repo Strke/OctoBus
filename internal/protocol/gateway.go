@@ -1893,7 +1893,7 @@ func stripOctobusMetadata(ctx context.Context) metadata.MD {
 
 func isOctobusControlMetadata(key string) bool {
 	normalized := strings.ToLower(key)
-	return strings.HasPrefix(normalized, "x-octobus-") && !strings.HasPrefix(normalized, "x-octobus-ext-")
+	return strings.HasPrefix(normalized, "x-octobus-")
 }
 
 func connectForwardMetadata(headers http.Header) metadata.MD {
