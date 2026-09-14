@@ -27,6 +27,6 @@ go tool covdata textfmt -i=coverage/e2e -o=coverage/e2e.out
 printf 'e2e coverage: '
 go tool cover -func=coverage/e2e.out | tail -n 1
 
-go run ./scripts/merge-coverprofiles.go coverage/coverage.out coverage/unit.out coverage/integration.out coverage/e2e.out
+go run ./scripts/merge-coverprofiles.go coverage/coverage.out coverage/unit.out coverage/e2e.out
 printf 'total coverage: '
 go tool cover -func=coverage/coverage.out | tail -n 1

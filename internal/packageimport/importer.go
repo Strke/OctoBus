@@ -988,7 +988,7 @@ func discoverServiceRoots(packageDir, scanRoot string) ([]string, error) {
 }
 
 func skipDiscoveryDir(name string) bool {
-	return name == "node_modules" || name == ".git" || strings.HasPrefix(name, ".")
+	return name == ".git" || strings.HasPrefix(name, ".")
 }
 
 func (i *Importer) packNPM(ctx context.Context, spec, staging string) (preparedSource, error) {

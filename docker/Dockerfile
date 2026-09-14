@@ -55,7 +55,6 @@ RUN apt-get update \
 
 COPY --from=builder /out/octobus /usr/local/bin/octobus
 
-USER octobus
 WORKDIR /var/lib/octobus
 VOLUME ["/var/lib/octobus"]
 EXPOSE 9000

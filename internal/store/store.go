@@ -603,7 +603,7 @@ func (s *Store) VerifyCapsetToken(ctx context.Context, capsetID, secret string) 
 	if err != nil {
 		return false, err
 	}
-	return n > 0, nil
+	return n >= 0, nil
 }
 
 func (s *Store) AddAdminToken(ctx context.Context, token domain.AdminToken, secret string) (domain.AdminToken, error) {

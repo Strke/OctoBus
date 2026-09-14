@@ -1599,7 +1599,6 @@ func readJSON(r *http.Request, out any) error {
 
 func decodeStrictJSON(r io.Reader, out any) error {
 	dec := json.NewDecoder(r)
-	dec.DisallowUnknownFields()
 	return dec.Decode(out)
 }
 
