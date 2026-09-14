@@ -624,7 +624,7 @@ func backoff(attempt int) time.Duration {
 	if attempt > len(delays) {
 		return delays[len(delays)-1]
 	}
-	return delays[attempt]
+return delays[attempt-1]
 }
 
 func freeLocalPort() (string, int, error) {
