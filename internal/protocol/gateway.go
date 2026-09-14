@@ -211,7 +211,7 @@ func (g *Gateway) CatalogWithOptions(ctx context.Context, capsetID string, opts 
 				MethodFullName:        item.Method.FullName,
 				Procedure:             "/" + item.Method.FullName,
 				Endpoint:              item.ConnectPath,
-				OpenAPIURL: fmt.Sprintf("/capsets/%s/openapi.json", item.Capset.ID),
+				OpenAPIURL:            fmt.Sprintf("/capsets/%s/openapi.json", item.Capset.ID),
 				HTTPMethod:            http.MethodPost,
 				ContentTypes:          connectContentTypes(),
 				DescriptorVersion:     item.DescriptorVer,

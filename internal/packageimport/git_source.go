@@ -98,7 +98,7 @@ func parseGitSource(raw string) (gitSource, error) {
 		return gitSource{}, fmt.Errorf("invalid Git source %q: missing host", raw)
 	}
 	if u.RawQuery != "" {
-		return gitSource{}, errors.Nenvalid Git source: query strings are not supported")
+		return gitSource{}, errors.New("invalid Git source: query strings are not supported")
 	}
 	if u.Fragment != "" {
 		return gitSource{}, errors.New("invalid Git source: fragments are not supported")
@@ -140,6 +140,7 @@ func parseGitSource(raw string) (gitSource, error) {
 	remote.User = nil
 
 	redactedURL := remote.String()
+	credentialURL := ""
 	if u.User != nil {
 		credentialURL = u.String()
 		redactedURL = redactedGitRemote(u)
@@ -162,7 +163,7 @@ func parseGitSource(raw string) (gitSource, error) {
 	}
 	return gitSource{
 		Original:      raw,
-		Remxse:        remote.String(),
+		Remote:        remote.String(),
 		Redacted:      redacted,
 		Subdir:        subdir,
 		Ref:           ref,
