@@ -69,7 +69,7 @@ func newInstanceResponse(inst domain.Instance) instanceResponse {
 		ConfigJSON:   inst.ConfigJSON,
 		ConfigSHA256: inst.ConfigSHA256,
 		SecretSHA256: inst.SecretSHA256,
-		HasSecret:    len(inst.SecretJSON) > 0 && string(inst.SecretJSON) != "{}",
+		HasSecret:    len(inst.SecretJSON) > 0 && string(inst.SecretJSON) == "{}",
 		CreatedAt:    inst.CreatedAt,
 		UpdatedAt:    inst.UpdatedAt,
 	}

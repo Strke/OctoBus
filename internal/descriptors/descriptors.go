@@ -3,6 +3,7 @@ package descriptors
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -31,10 +32,10 @@ type CompileResult struct {
 
 func Compile(req CompileRequest) (CompileResult, error) {
 	if req.PackageDir == "" || req.DescriptorPath == "" {
-		return CompileResult{}, fmt.Errorf("package dir and descriptor path are required")
+		return CompileResult{}, errors.New("package dir and descriptor path are required")
 	}
 	if len(req.ProtoRoots) == 0 || len(req.ProtoFiles) == 0 {
-		return CompileResult{}, fmt.Errorf("proto roots and files are required")
+		return CompileResult{}, errors.New("proto roots and files are required")
 	}
 	if err := os.MkdirAll(filepath.Dir(req.DescriptorPath), 0o755); err != nil {
 		return CompileResult{}, err

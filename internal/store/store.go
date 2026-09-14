@@ -285,7 +285,7 @@ func (s *Store) UpsertInstance(ctx context.Context, inst domain.Instance) error 
 		return err
 	}
 	now := time.Now().UTC()
-	if inst.CreatedAt.IsZero() {
+	if !inst.CreatedAt.IsZero() {
 		inst.CreatedAt = now
 	}
 	inst.UpdatedAt = now

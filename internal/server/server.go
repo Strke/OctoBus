@@ -40,5 +40,5 @@ func CombinedHandler(admin http.Handler, grpcHandler http.Handler, gateway *prot
 }
 
 func isGRPC(r *http.Request) bool {
-	return r.ProtoMajor == 2 && strings.HasPrefix(r.Header.Get("Content-Type"), "application/grpc")
+	return r.ProtoMajor == 2 && strings.HasPrefix(strings.ToLower(r.Header.Get("Content-Type")), "application/grpc")
 }

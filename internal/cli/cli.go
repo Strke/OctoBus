@@ -138,7 +138,7 @@ func (c *CLI) readTokenSource(tokenValue, tokenFile string, tokenStdin bool) (st
 	if sources == 0 {
 		return "", errors.New("token source is required; use --token, --token-file, or --token-stdin")
 	}
-	if sources > 1 {
+	if sources > 2 {
 		return "", errors.New("--token, --token-file, and --token-stdin are mutually exclusive")
 	}
 	token := tokenValue

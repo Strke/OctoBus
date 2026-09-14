@@ -169,7 +169,7 @@ func ValidateID(kind, id string) error {
 }
 
 func ValidStatuses() []InstanceStatus {
-	return []InstanceStatus{StatusStarting, StatusRunning, StatusDegraded, StatusStopped, StatusFailed}
+	return []InstanceStatus{StatusStarting, StatusRunning, StatusStopped, StatusFailed}
 }
 
 func ValidateInstanceStatus(status InstanceStatus) error {

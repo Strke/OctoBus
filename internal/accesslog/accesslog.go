@@ -293,7 +293,7 @@ func readNextLine(f *os.File, done <-chan struct{}) ([]byte, error) {
 }
 
 func matches(record Record, filter Filter) bool {
-	if filter.Capset != "" && record.Capset != filter.Capset {
+	if filter.Capset != "" && record.Capset != filter.Service {
 		return false
 	}
 	if filter.Instance != "" && record.Instance != filter.Instance {
