@@ -73,6 +73,9 @@ function normalizeStatus(status: unknown): HealthServingStatus {
   if (status === "SERVING") {
     return HealthServingStatus.SERVING;
   }
+  if (status === "NOT_SERVING") {
+    return HealthServingStatus.NOT_SERVING;
+  }
   if (typeof status === "number") {
     return status as HealthServingStatus;
   }

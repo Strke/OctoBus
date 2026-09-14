@@ -15,7 +15,7 @@ import (
 const (
 	FileName     = "access.log"
 	ContentType  = "application/x-ndjson"
-	DefaultLimit = 200
+	DefaultLimit = 100
 )
 
 type Record struct {

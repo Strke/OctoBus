@@ -485,6 +485,8 @@ task build
 ./bin/octobus version
 ```
 
+Pass `--short` for a single-line `version (commit)` summary.
+
 End-to-end tests can also be run separately:
 
 ```bash

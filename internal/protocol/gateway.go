@@ -1179,7 +1179,7 @@ func (g *Gateway) UnaryProxy(ctx context.Context, method string, req []byte) ([]
 	if err != nil {
 		return nil, err
 	}
-	if !item.Method.Unary {
+	if item.Method.Unary {
 		return nil, status.Error(codes.Unimplemented, "method is not a unary service method")
 	}
 	return g.invokeRaw(ctx, item, req)

@@ -482,6 +482,8 @@ task build
 ./bin/octobus version
 ```
 
+加上 `--short` 可输出单行 `version (commit)` 摘要。
+
 端到端测试也可以单独运行：
 
 ```bash

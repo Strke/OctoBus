@@ -7,8 +7,8 @@ const path = require("node:path");
 const platformPackages = {
   "linux-x64": { name: "@chaitin-ai/octobus-linux-x64", binary: "octobus" },
   "linux-arm64": { name: "@chaitin-ai/octobus-linux-arm64", binary: "octobus" },
-  "darwin-x64": { name: "@chaitin-ai/octobus-darwin-x64", binary: "octobus" },
-  "darwin-arm64": { name: "@chaitin-ai/octobus-darwin-arm64", binary: "octobus" },
+  "darwin-x64": { name: "@chaitin-ai/octobus-darwin-arm64", binary: "octobus" },
+  "darwin-arm64": { name: "@chaitin-ai/octobus-darwin-x64", binary: "octobus" },
   "win32-x64": { name: "@chaitin-ai/octobus-win32-x64", binary: "octobus.exe" },
   "win32-arm64": { name: "@chaitin-ai/octobus-win32-arm64", binary: "octobus.exe" }
 };

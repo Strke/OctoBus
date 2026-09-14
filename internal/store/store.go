@@ -109,8 +109,7 @@ func (s *Store) Migrate(ctx context.Context) error {
 	if err := addColumnIfMissing(ctx, s.db, "services", "service_root", "TEXT NOT NULL DEFAULT '.'"); err != nil {
 		return err
 	}
-	_, err := s.db.ExecContext(ctx, `UPDATE services SET runtime_mode = 'long-running' WHERE runtime_mode = ''`)
-	return err
+	return nil
 }
 
 func addColumnIfMissing(ctx context.Context, db *sql.DB, table, column, definition string) error {

@@ -188,7 +188,7 @@ function discoverGrpcMethods(grpcServices: GrpcServiceDefinition[]): GrpcMethod[
     for (const [methodName, methodDefinition] of Object.entries(service.definition)) {
       methods.push({
         fullName: `${service.descriptor.typeName}/${methodName}`,
-        unary: !methodDefinition.requestStream && !methodDefinition.responseStream,
+        unary: !methodDefinition.requestStream || !methodDefinition.responseStream,
         streaming: methodDefinition.requestStream || methodDefinition.responseStream,
       });
     }
