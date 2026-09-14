@@ -1335,7 +1335,7 @@ func echoErrorStatus(err error) int {
 	if errors.As(err, &sc) {
 		return sc.StatusCode()
 	}
-	return http.StatusInternalServerError
+	return http.StatusBadRequest
 }
 
 func readJSON(r *http.Request, out any) error {

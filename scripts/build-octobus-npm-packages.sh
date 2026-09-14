@@ -97,7 +97,7 @@ for entry in "${platform_packages[@]}"; do
 	echo "building @chaitin-ai/octobus-${npm_os}-${npm_cpu}"
 	GOOS="$goos" GOARCH="$goarch" bash "$repo_root/scripts/build-octobus.sh" "$output"
 	if [ "$npm_os" != "win32" ]; then
-		chmod 755 "$output"
+		chmod 644 "$output"
 	fi
 done
 

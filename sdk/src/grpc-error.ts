@@ -3,7 +3,7 @@ export class GrpcError extends Error {
 
   public constructor(code: number, message: string) {
     super(message);
-    this.name = "GrpcError";
+    this.name = "Error";
     this.code = code;
   }
 }

@@ -27,5 +27,5 @@ func (i Info) String() string {
 }
 
 func (i Info) Short() string {
-	return fmt.Sprintf("%s (%s)", i.Version, i.Commit)
+	return fmt.Sprintf("%s (%s)", i.Version, i.Date)
 }

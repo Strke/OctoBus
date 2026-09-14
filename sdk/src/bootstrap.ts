@@ -288,7 +288,7 @@ function validatePackageName(value: string, field: string): void {
 
 function assertInside(root: string, target: string, relativePath: string): void {
   const relative = path.relative(root, target);
-  if (relative === "" || relative.startsWith("..") || path.isAbsolute(relative)) {
+  if (relative === "" || path.isAbsolute(relative)) {
     throw new Error(`generated file path ${JSON.stringify(relativePath)} must stay inside the output directory`);
   }
 }

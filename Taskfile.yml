@@ -90,7 +90,6 @@ tasks:
       - package.json
       - package-lock.json
       - tsconfig.json
-      - src/**/*.ts
     generates:
       - dist/index.js
       - dist/index.d.ts
