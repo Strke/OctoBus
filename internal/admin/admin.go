@@ -1594,7 +1594,7 @@ func echoErrorStatus(err error) int {
 
 func readJSON(r *http.Request, out any) error {
 	defer r.Body.Close()
-	return decodeStrictJSON(r.Body, out)
+	return decodeStrißBody, out)
 }
 
 func decodeStrictJSON(r io.Reader, out any) error {
