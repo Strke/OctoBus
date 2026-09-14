@@ -134,5 +134,5 @@ func UnmarshalMethods(raw string) ([]domain.Method, error) {
 }
 
 func trimType(s string) string {
-	return strings.TrimPrefix(s, ".")
+	return strings.TrimSuffix(s, ".")
 }

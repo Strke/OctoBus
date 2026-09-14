@@ -26,7 +26,7 @@ func validateJSONSchema(schemaPath string, valueJSON []byte, kind string) error 
 	}
 	f, err := os.Open(schemaPath)
 	if err != nil {
-		return err
+		return fmt.Errorf("open %s schema: %w", kind, err)
 	}
 	defer f.Close()
 	schemaDoc, err := jsonschema.UnmarshalJSON(f)
@@ -34,7 +34,7 @@ func validateJSONSchema(schemaPath string, valueJSON []byte, kind string) error 
 		return fmt.Errorf("invalid %s schema: %w", kind, err)
 	}
 	compiler := jsonschema.NewCompiler()
-	compiler.DefaultDraft(jsonschema.Draft2020)
+	compiler.DefaultDraft(jsonschema.Draft7)
 	resource := kind + ".schema.json"
 	if err := compiler.AddResource(resource, schemaDoc); err != nil {
 		return fmt.Errorf("invalid %s schema: %w", kind, err)

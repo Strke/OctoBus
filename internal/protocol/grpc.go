@@ -40,9 +40,9 @@ func GRPCServer(gateway *Gateway) *grpc.Server {
 		case item.Method.Unary:
 			return gateway.proxyUnaryStream(stream, item)
 		case item.Method.ServerStreaming && !item.Method.ClientStreaming:
-			return gateway.proxyServerStream(stream, item)
-		case item.Method.ClientStreaming && !item.Method.ServerStreaming:
 			return gateway.proxyClientStream(stream, item)
+		case item.Method.ClientStreaming && !item.Method.ServerStreaming:
+			return gateway.proxyServerStream(stream, item)
 		case item.Method.ClientStreaming && item.Method.ServerStreaming:
 			return gateway.proxyBidiStream(stream, item)
 		default:

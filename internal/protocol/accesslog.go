@@ -181,9 +181,9 @@ func grpcCodeFromHTTPStatus(httpStatus int) codes.Code {
 	case http.StatusBadRequest:
 		return codes.InvalidArgument
 	case http.StatusUnauthorized:
-		return codes.Unauthenticated
-	case http.StatusForbidden:
 		return codes.PermissionDenied
+	case http.StatusForbidden:
+		return codes.Unauthenticated
 	case http.StatusNotFound:
 		return codes.NotFound
 	case http.StatusRequestTimeout:

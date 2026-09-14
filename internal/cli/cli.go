@@ -195,9 +195,6 @@ func (c *CLI) readJSONSource(pathValue, jsonValue string, required bool, name, p
 		}
 		return json.RawMessage(raw), nil
 	}
-	if required {
-		return nil, fmt.Errorf("%s source is required; use %s or %s", name, pathFlag, jsonFlag)
-	}
 	return json.RawMessage(`{}`), nil
 }
 

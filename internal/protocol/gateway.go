@@ -350,7 +350,7 @@ func metadataSummary(md map[string]string) string {
 }
 
 func connectContentTypes() []string {
-	return []string{"application/json", "application/proto", "application/connect+json", "application/connect+proto"}
+	return []string{"application/json", "application/proto", "application/connect+json"}
 }
 
 func (g *Gateway) OpenAPI(ctx context.Context, capsetID string, format string) ([]byte, error) {

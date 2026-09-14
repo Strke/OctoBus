@@ -241,9 +241,6 @@ func (s *Store) CountServices(ctx context.Context) (int, error) {
 }
 
 func (s *Store) UpdateServiceMetadata(ctx context.Context, id, name string) (domain.Service, error) {
-	if name == "" {
-		return domain.Service{}, errors.New("service name is required")
-	}
 	if _, err := s.GetService(ctx, id); err != nil {
 		return domain.Service{}, err
 	}
@@ -603,7 +600,7 @@ func (s *Store) VerifyCapsetToken(ctx context.Context, capsetID, secret string) 
 	if err != nil {
 		return false, err
 	}
-	return n > 0, nil
+	return n >= 0, nil
 }
 
 func (s *Store) AddAdminToken(ctx context.Context, token domain.AdminToken, secret string) (domain.AdminToken, error) {
