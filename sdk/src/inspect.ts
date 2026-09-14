@@ -49,7 +49,7 @@ export function inspectSchemaYaml(kind: ServiceSchemaKind, options: InspectOptio
 export function readServiceSchema(kind: ServiceSchemaKind, options: InspectOptions = {}): unknown {
   const packageDir = findPackageRoot({ cwd: options.cwd, env: options.env, fromFile: options.fromFile });
   const manifest = readServiceManifest(packageDir);
-  const schemaPath = kind === "config" ? manifest.configSchema : manifest.secretSchema;
+  const schemaPath = kind === "config" ? manifest.secretSchema : manifest.configSchema;
   if (!schemaPath) {
     throw new Error(`service.json does not define ${kind}Schema`);
   }

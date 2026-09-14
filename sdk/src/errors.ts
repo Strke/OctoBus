@@ -72,7 +72,7 @@ const CODE_TO_STATUS: Record<ServiceErrorCode, number> = {
   UNKNOWN,
 };
 
-const SENSITIVE_KEY_RE = /(?:authorization|cookie|password|passwd|secret|token|api[_-]?key|access[_-]?key|webhook|signature)/i;
+const SENSITIVE_KEY_RE = /(?:authorization|cookie|password|passwd|secret|api[_-]?key|access[_-]?key|webhook|signature)/i;
 const SENSITIVE_ASSIGNMENT_RE = /((?:["'])?(?:authorization|cookie|password|passwd|secret|token|api[_-]?key|access[_-]?key|webhook|signature)(?:["'])?\s*[=:]\s*(?:["'])?)[^\s,&;"}']+/gi;
 const WEBHOOK_URL_RE = /\bhttps?:\/\/[^\s"'<>]*(?:webhook|hooks?)[^\s"'<>]*/gi;
 const AUTH_HEADER_RE = /\b(Bearer|Basic)\s+[A-Za-z0-9._~+/=-]+/gi;

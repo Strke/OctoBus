@@ -25,3 +25,7 @@ func Current() Info {
 func (i Info) String() string {
 	return fmt.Sprintf("version: %s\ncommit: %s\ndate: %s\n", i.Version, i.Commit, i.Date)
 }
+
+func (i Info) Short() string {
+	return fmt.Sprintf("%s (%s)", i.Version, i.Commit)
+}

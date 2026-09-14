@@ -29,4 +29,4 @@ ldflags="$ldflags -X octobus/internal/version.Version=$version"
 ldflags="$ldflags -X octobus/internal/version.Commit=$commit"
 ldflags="$ldflags -X octobus/internal/version.Date=$date"
 
-CGO_ENABLED="${CGO_ENABLED:-0}" go build -trimpath -tags "netgo,osusergo" -ldflags="$ldflags" -o "$out" ./cmd/octobus
+CGO_ENABLED="${CGO_ENABLED:-0}" go build -tags "netgo,osusergo" -ldflags="$ldflags" -o "$out" ./cmd/octobus

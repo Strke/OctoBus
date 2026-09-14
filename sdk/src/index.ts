@@ -36,5 +36,7 @@ export { loadServiceDescriptor, loadServicePackage, loadServiceRuntime } from ".
 export type { LoadServiceDescriptorOptions, LoadedServicePackage } from "./proto-loader.js";
 export { assertValidService, formatValidationIssues, validateService } from "./validation.js";
 export type { ServiceValidationIssue, ServiceValidationOptions, ServiceValidationResult, ValidationSeverity } from "./validation.js";
+export { inspectJson, inspectManifest, inspectSchemaJson, inspectSchemaYaml, readServiceSchema } from "./inspect.js";
+export type { InspectOptions, ServiceSchemaKind } from "./inspect.js";
 export * as status from "./status.js";
 export * as grpcStatus from "./status.js";

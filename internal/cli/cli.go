@@ -101,15 +101,23 @@ func (c *CLI) Commands() []*cobra.Command {
 }
 
 func (c *CLI) versionCommand() *cobra.Command {
-	return &cobra.Command{
+	var short bool
+	cmd := &cobra.Command{
 		Use:   "version",
 		Short: "Print version information",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			_, err := fmt.Fprint(cmd.OutOrStdout(), version.Current().String())
+			info := version.Current()
+			out := info.String()
+			if short {
+				out = info.Short() + "\n"
+			}
+			_, err := fmt.Fprint(cmd.OutOrStdout(), out)
 			return err
 		},
 	}
+	cmd.Flags().BoolVar(&short, "short", false, "print a single-line version string")
+	return cmd
 }
 
 func (c *CLI) readConfig(configPath, configJSON string, required bool) (json.RawMessage, error) {

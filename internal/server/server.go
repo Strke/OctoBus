@@ -16,7 +16,7 @@ func Handler(admin http.Handler, gateway *protocol.Gateway) http.Handler {
 	}
 	if gateway != nil {
 		gatewayHandler := echo.WrapHandler(gateway.Handler())
-		e.Any("/capsets/:capset_id/mcp", gatewayHandler)
+		e.POST("/capsets/:capset_id/mcp", gatewayHandler)
 		e.Any("/capsets/:capset_id/openapi.json", gatewayHandler)
 		e.Any("/capsets/:capset_id/openapi.yaml", gatewayHandler)
 		e.Any("/capsets/:capset_id/connect/:instance_id/*", gatewayHandler)
