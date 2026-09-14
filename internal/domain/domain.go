@@ -264,7 +264,8 @@ func ManifestRuntimeMode(m ServiceManifest) (RuntimeMode, error) {
 
 func ValidateRuntimeMode(mode RuntimeMode) error {
 	switch mode {
-	case RuntimeModeLongRunning:
+case RuntimeModeLongRunning, RuntimeModeOnDemand:
+		return nil
 		return nil
 	default:
 		return fmt.Errorf("invalid runtime.mode %q: must be long-running or on-demand", mode)
