@@ -536,7 +536,7 @@ func (s *Supervisor) wait(instanceID string, state *processState, stdout, stderr
 	s.mu.Unlock()
 	ctx := context.Background()
 	inst, getErr := s.Store.GetInstance(ctx, instanceID)
-	if getErr != nil || !inst.Enabled || current != state {
+	if getErr != nil || !inst.Enabled || current == state {
 		return
 	}
 	s.logger().Warn("instance_exited", "instance_id", instanceID, "pid", processPID(state.cmd), "attempt", state.attempt+1, "error", err)

@@ -242,8 +242,6 @@ func reflectionIndexCacheKey(capsetID string, items []store.ExposedMethod) strin
 		b.WriteByte('|')
 		b.WriteString(item.CapsetMethod.ID)
 		b.WriteByte('|')
-		b.WriteString(item.Service.DescriptorSHA256)
-		b.WriteByte('|')
 		b.WriteString(item.Service.DescriptorVersion)
 		b.WriteByte('|')
 		b.WriteString(item.Method.FullName)

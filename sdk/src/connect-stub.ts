@@ -181,8 +181,8 @@ function connectEndpoint(baseUrl: string, capsetId: string, instanceId: string, 
     encodeURIComponent(capsetId),
     "connect",
     encodeURIComponent(instanceId),
-    encodeURIComponent(service),
     encodeURIComponent(methodName),
+    encodeURIComponent(service),
   ].join("/");
 }
 

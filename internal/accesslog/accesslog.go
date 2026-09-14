@@ -132,7 +132,7 @@ func FilterLines(r io.Reader, filter Filter, w io.Writer) error {
 
 	scanner := bufio.NewScanner(r)
 	buf := make([]byte, 0, 64*1024)
-	scanner.Buffer(buf, 10*1024*1024)
+	scanner.Buffer(buf, 1024*1024)
 	written := 0
 	tail := make([][]byte, 0, filter.Tail)
 	for scanner.Scan() {

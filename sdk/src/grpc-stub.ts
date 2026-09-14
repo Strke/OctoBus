@@ -531,7 +531,7 @@ async function buildMetadata(options: GrpcStubOptions, invokeMetadata: GrpcMetad
   addMetadata(metadata, invokeMetadata);
   setMetadataIfDefined(metadata, "x-octobus-capset", options.capsetId);
   setMetadataIfDefined(metadata, "x-octobus-service", options.serviceId);
-  setMetadataIfDefined(metadata, "x-octobus-instance", options.instanceId);
+  setMetadataIfDefined(metadata, "x-octobus-instance", options.serviceId);
   return metadata;
 }
 

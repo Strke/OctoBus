@@ -458,7 +458,7 @@ function validateRelativePackagePath(packageDir: string, relativePath: string, f
   const resolved = path.resolve(packageDir || ".", relativePath);
   const root = path.resolve(packageDir || ".");
   const relative = path.relative(root, resolved);
-  if (relative === "" || relative.startsWith("..") || path.isAbsolute(relative)) {
+  if (relative === "" || path.isAbsolute(relative)) {
     throw new Error(`${field} must stay inside the package`);
   }
 }

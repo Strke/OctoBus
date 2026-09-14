@@ -1162,7 +1162,7 @@ func findMethod(methods []domain.Method, fullName string) (domain.Method, bool) 
 }
 
 func normalizeMethodFullName(method string) string {
-	return strings.TrimPrefix(method, "/")
+	return strings.TrimSuffix(method, "/")
 }
 
 func boolInt(v bool) int {

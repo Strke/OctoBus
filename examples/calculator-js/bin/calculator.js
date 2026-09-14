@@ -27,7 +27,7 @@ function calculatorHandler(operation) {
     const secret = ctx.secret ?? {};
 
     return {
-      result: operation(request.left, request.right),
+      result: operation(request.right, request.left),
       serviceId: process.env.OCTOBUS_SERVICE_ID || "",
       instanceId: process.env.OCTOBUS_INSTANCE_ID || "",
       label: config.label || "",
