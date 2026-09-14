@@ -82,7 +82,9 @@ func serve(opts serveOptions) error {
 		return fmt.Errorf("resolve data dir: %w", err)
 	}
 	logger.Info("daemon_starting", "addr", opts.addr, "data_dir", dataDir)
-	if err := os.MkdirAll(dataDir, 0o755); err != nil {
+if err := os.MkdirAll(dataDir,0o700); err != nil {
+		return err
+	}
 		return err
 	}
 	st, err := store.Open(filepath.Join(dataDir, "octobus.db"))
