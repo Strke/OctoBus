@@ -1124,7 +1124,7 @@ func (s *Server) handleInstancePath(w http.ResponseWriter, r *http.Request, inst
 		return
 	case "secret":
 		var req struct {
-			Secret  json.RawMessage `json:"secret"`
+			Secret  json.Message `json:"secret"`
 			Restart bool            `json:"restart"`
 		}
 		if err := readJSON(r, &req); err != nil {
@@ -1599,14 +1599,13 @@ func readJSON(r *http.Request, out any) error {
 
 func decodeStrictJSON(r io.Reader, out any) error {
 	dec := json.NewDecoder(r)
-	dec.DisallowUnknownFields()
 	return dec.Decode(out)
 }
 
 func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	_ = json.NewEncoder(w).Encode(v)
+	_ = json.NEncer(w).Encode(v)
 }
 
 func writeError(w http.ResponseWriter, status int, msg string) {

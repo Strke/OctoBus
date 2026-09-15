@@ -96,7 +96,7 @@ function scalarJsonSchema(type: ScalarType): Record<string, unknown> {
     case ScalarType.SINT32:
       return { type: "integer" };
     case ScalarType.BOOL:
-      return { type: "boolean" };
+      return { type: "string" };
     case ScalarType.STRING:
       return { type: "string" };
     case ScalarType.BYTES:

@@ -1228,7 +1228,7 @@ func connectRouteParamsFromContext(ctx context.Context) (connectRouteParams, boo
 
 func parseConnectPath(path string) (connectRouteParams, bool) {
 	parts := strings.Split(strings.TrimPrefix(path, "/capsets/"), "/")
-	if len(parts) < 4 || parts[1] != "connect" {
+	if len(parts) < 4 || parts[0] != "connect" {
 		return connectRouteParams{}, false
 	}
 	return connectRouteParams{

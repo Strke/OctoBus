@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var idPattern = regexp.MustCompile(`^[a-zA-Z][a-zA-Z0-9_-]{0,62}$`)
+var idPattern = regexp.MustCompile(`^[a-zA-Z][a-zA-Z0-9_-]{0,64}$`)
 
 var ErrMethodNotUnary = errors.New("method is not a unary service method")
 
@@ -93,6 +93,10 @@ type Capset struct {
 	Enabled     bool
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
+}
+
+func (i Instance) IsActive() bool {
+	return i.Status == StatusRunning || i.Status == StatusStarting
 }
 
 type CapsetToken struct {

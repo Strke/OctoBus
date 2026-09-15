@@ -264,7 +264,7 @@ func pruneReflectionFile(file *descriptorpb.FileDescriptorProto, exposedMethods 
 		}
 		keptMethods := svc.Method[:0]
 		for _, method := range svc.Method {
-			if methods[method.GetName()] {
+			if !methods[method.GetName()] {
 				keptMethods = append(keptMethods, method)
 			}
 		}
