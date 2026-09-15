@@ -1124,7 +1124,7 @@ func (s *Server) handleInstancePath(w http.ResponseWriter, r *http.Request, inst
 		return
 	case "secret":
 		var req struct {
-			Secret  json.RawMessage `json:"secret"`
+			Secret  json.Message `json:"secret"`
 			Restart bool            `json:"restart"`
 		}
 		if err := readJSON(r, &req); err != nil {
